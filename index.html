@@ -267,7 +267,7 @@ mark{background:var(--blue);color:var(--brand);border-radius:3px;padding:0 2px}
 <p class="reveal">Estas son las ideas principales de nuestro proyecto, en pocas líneas.</p>
 <h3 class="ptit reveal">Puntos clave</h3>
 <div class="kp" id="kp"></div>
-<div class="dlbox reveal"><a class="btn lnk" href="PROGRAMA_ELECTORAL_NEXO.pdf" download>DESCARGAR EL PROGRAMA (PDF)</a></div>
+<div class="dlbox reveal"><a class="btn lnk" id="dl" href="PROGRAMA_ELECTORAL_NEXO.pdf" download>DESCARGAR EL PROGRAMA (PDF)</a><div class="msg" id="dlmsg" aria-live="polite"></div></div>
 </div></section>
 
 
@@ -391,6 +391,13 @@ document.getElementById('fm').addEventListener('submit',function(e){e.preventDef
 });
 var KP=[["Voto familiar", "Voto unificado de cada hogar a través del cabeza de familia (la madre, si falta el padre), con reforma de la ley electoral y del artículo 23 de la Constitución.", [6]], ["Salario por Trabajo Doméstico", "Remuneración mensual de entre 100 y 400 € por el trabajo doméstico y de cuidados no remunerado, según el tiempo dedicado y la capacidad económica de cada familia.", [8]], ["Ayuda mensual por hijo", "100 € por menor de 3 años, 80 € de 3 a 6 años y 60 € de 6 a 18 años. Además, 100 € al mes para las familias de cinco miembros o más.", [10]], ["Menos impuestos para las familias", "Rebaja selectiva de los tramos del IRPF para las rentas del trabajo, deducciones por hijo y bonificación del IBI de la vivienda habitual de familias con hijos.", [51, 52, 54]], ["Pensiones públicas", "Defensa de un sistema público de pensiones, con oposición a su privatización parcial o total y prioridad para los pensionistas con menos recursos.", [66, 69]], ["Vivienda", "Vivienda protegida, financiación para quien no tenga el ahorro inicial para comprar su primera vivienda y trámites urbanísticos más ágiles.", [71, 72, 73]], ["Educación", "Sustituir la LOMLOE por una ley centrada en la excelencia y la autoridad docente, religión evaluable, libertad de elección de centro y un Servicio Cívico-Militar voluntario.", [98, 99]], ["Defensa de la vida", "Protección de la vida desde la gestación con alternativas al aborto, oposición a la eutanasia y derogación de las leyes del aborto y de la eutanasia.", [126, 127, 130, 131]], ["Sanidad", "Sanidad pública con tarjeta sanitaria única nacional, más profesionales y reducción drástica de las listas de espera.", [141, 142]], ["Seguridad", "Más medios para las Fuerzas y Cuerpos de Seguridad del Estado y más presencia policial en barrios y municipios.", [147, 148]], ["Inmigración", "Control estricto de fronteras, retorno de la inmigración irregular e integración ligada al idioma, al cumplimiento de la ley y a la identidad constitucional.", [164, 165, 166]]];
 document.getElementById('kp').innerHTML=KP.map(function(k){return '<div class="kpc"><h4>'+k[0]+'</h4><p>'+k[1]+'</p></div>'}).join('');
+
+(function(){var C=['PROGRAMA_ELECTORAL_NEXO.pdf','PROGRAMA_%20ELECTORAL_NEXO.pdf','PROGRAMA%20ELECTORAL%20NEXO.pdf'],a=document.getElementById('dl'),m=document.getElementById('dlmsg');
+ function go(u){var l=document.createElement('a');l.href=u;l.download='PROGRAMA_ELECTORAL_NEXO.pdf';document.body.appendChild(l);l.click();l.remove()}
+ function t(i){if(i>=C.length){m.textContent='Ahora mismo no podemos descargar el programa. Inténtalo de nuevo en unos minutos.';return}
+  fetch(C[i],{method:'HEAD'}).then(function(r){if(r.ok)go(C[i]);else t(i+1)}).catch(function(){t(i+1)})}
+ a.addEventListener('click',function(e){e.preventDefault();m.textContent='';if(location.protocol==='file:'){go(C[0]);return}t(0)});
+})();
 </script>
 </body>
 </html>
