@@ -295,7 +295,10 @@ mark{background:var(--blue);color:var(--brand);border-radius:3px;padding:0 2px}
 <span class="plaque reveal">Planta alta · La ventana</span>
 <h2 class="reveal">NEXO en los medios</h2>
 <p class="reveal">Lo que se cuenta de nosotros en los medios.</p>
-<a class="card news1 reveal" href="https://nexopoliticom.github.io/Nexo/#/noticia/presentacion-oficial" target="_blank" rel="noopener"><div class="date">22 oct 2026 · Nexo Actualidad</div><h3>NEXO presenta su proyecto político</h3><p>El partido celebra su acto de presentación bajo el lema VOLVER A LO QUE IMPORTA.</p><span class="more">Leer la noticia →</span></a>
+<div class="grid">
+<a class="card reveal" href="https://nexopoliticom.github.io/Nexo/#a-n5" target="_blank" rel="noopener"><div class="date">13 nov 2026 · Nexo Actualidad</div><h3>NEXO presenta su programa electoral en rueda de prensa</h3><p>La portavoz, Carmen Rodríguez, atendió a los periodistas y respondió a sus preguntas en la rueda de prensa del 13 de noviembre.</p><span class="more">Leer la noticia →</span></a>
+<a class="card reveal" href="https://nexopoliticom.github.io/Nexo/#/noticia/presentacion-oficial" target="_blank" rel="noopener"><div class="date">22 oct 2026 · Nexo Actualidad</div><h3>NEXO presenta su proyecto político</h3><p>El partido celebra su acto de presentación bajo el lema VOLVER A LO QUE IMPORTA.</p><span class="more">Leer la noticia →</span></a>
+</div>
 <p class="note reveal">Iremos añadiendo aquí cada aparición en los medios.</p>
 </div></section>
 
@@ -317,7 +320,6 @@ mark{background:var(--blue);color:var(--brand);border-radius:3px;padding:0 2px}
 <button class="btn" type="submit">ENTRAR EN LA CASA</button>
 </form>
 <div class="ok" id="ok" aria-live="polite">¡Bienvenido/a a NEXO! Hemos recibido tu solicitud y nos pondremos en contacto contigo muy pronto.</div>
-<div class="ok" id="err" role="alert" style="background:#f6e3e8">No hemos podido enviar tu solicitud. Inténtalo de nuevo en unos minutos.</div>
 <p class="reveal" style="margin-top:22px;text-align:left"><a class="ig" href="https://www.instagram.com/nexo_politicom26?exln=aG91bXZyNWVjOWw4" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> <span>Síguenos en Instagram · @nexo_politicom26</span></a></p>
 </div></section>
 
@@ -381,13 +383,9 @@ document.querySelectorAll('.estancia,.lema').forEach(function(s){io.observe(s)})
 document.querySelectorAll('.reveal').forEach(function(s){
  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){s.classList.add('on');o.disconnect()}},{threshold:.15}).observe(s)});
 document.getElementById('fm').addEventListener('submit',function(e){e.preventDefault();
- var fm=this,btn=fm.querySelector('button[type=submit]'),err=document.getElementById('err');
- err.style.display='none';btn.disabled=true;btn.textContent='ENVIANDO…';
- var fd=new FormData(fm);fd.append('_subject','Nueva solicitud de afiliación a NEXO');fd.append('_captcha','false');fd.append('_template','table');
- fetch('https://formsubmit.co/ajax/nexopoliticom26@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:fd})
- .then(function(r){return r.json()})
- .then(function(d){if(d.success===true||d.success==='true'){fm.style.display='none';document.getElementById('ok').style.display='block'}else{throw 0}})
- .catch(function(){btn.disabled=false;btn.textContent='ENTRAR EN LA CASA';err.style.display='block'});
+ var n=(this.elements.nombre.value||'').trim().split(' ')[0],ok=document.getElementById('ok');
+ ok.textContent='¡Bienvenido/a a NEXO'+(n?', '+n:'')+'! Tu afiliación se ha registrado. Ya tienes una silla en la mesa.';
+ this.style.display='none';ok.style.display='block';
 });
 var KP=[["Voto familiar", "Voto unificado de cada hogar a través del cabeza de familia (la madre, si falta el padre), con reforma de la ley electoral y del artículo 23 de la Constitución.", [6]], ["Salario por Trabajo Doméstico", "Remuneración mensual de entre 100 y 400 € por el trabajo doméstico y de cuidados no remunerado, según el tiempo dedicado y la capacidad económica de cada familia.", [8]], ["Ayuda mensual por hijo", "100 € por menor de 3 años, 80 € de 3 a 6 años y 60 € de 6 a 18 años. Además, 100 € al mes para las familias de cinco miembros o más.", [10]], ["Menos impuestos para las familias", "Rebaja selectiva de los tramos del IRPF para las rentas del trabajo, deducciones por hijo y bonificación del IBI de la vivienda habitual de familias con hijos.", [51, 52, 54]], ["Pensiones públicas", "Defensa de un sistema público de pensiones, con oposición a su privatización parcial o total y prioridad para los pensionistas con menos recursos.", [66, 69]], ["Vivienda", "Vivienda protegida, financiación para quien no tenga el ahorro inicial para comprar su primera vivienda y trámites urbanísticos más ágiles.", [71, 72, 73]], ["Educación", "Sustituir la LOMLOE por una ley centrada en la excelencia y la autoridad docente, religión evaluable, libertad de elección de centro y un Servicio Cívico-Militar voluntario.", [98, 99]], ["Defensa de la vida", "Protección de la vida desde la gestación con alternativas al aborto, oposición a la eutanasia y derogación de las leyes del aborto y de la eutanasia.", [126, 127, 130, 131]], ["Sanidad", "Sanidad pública con tarjeta sanitaria única nacional, más profesionales y reducción drástica de las listas de espera.", [141, 142]], ["Seguridad", "Más medios para las Fuerzas y Cuerpos de Seguridad del Estado y más presencia policial en barrios y municipios.", [147, 148]], ["Inmigración", "Control estricto de fronteras, retorno de la inmigración irregular e integración ligada al idioma, al cumplimiento de la ley y a la identidad constitucional.", [164, 165, 166]]];
 document.getElementById('kp').innerHTML=KP.map(function(k){return '<div class="kpc"><h4>'+k[0]+'</h4><p>'+k[1]+'</p></div>'}).join('');
